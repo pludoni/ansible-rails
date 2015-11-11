@@ -49,5 +49,9 @@ server {
     passenger_enabled on;
   }
 
+  {% if nginx_site_config is defined %}
+  {{ nginx_site_config }}
+  {% endif %}
+
 
 }
