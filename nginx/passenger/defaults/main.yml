@@ -18,3 +18,9 @@ passenger_variables:
   passenger_max_preloader_idle_time: 0
 
 nginx_config_file: "{{app_name}}.conf"
+
+# Nginx Regex for paths that should be cached by clients for 7 days
+nginx_public_folder_to_cache: '^/(system|uploads|video)/'
+nginx_max_body_size: 200M
+
+nginx_gzip_types: 'text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/x-icon'
