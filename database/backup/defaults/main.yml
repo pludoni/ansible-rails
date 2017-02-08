@@ -10,7 +10,8 @@ database_backup_dir: "{{database_backup_base_dir}}/{{database_backup_name}}"
 # Keep that number of backups, e.g. last 7 days
 database_backup_keep: 7
 
-# Crontab hour + minute, e.g. 04:00 am
+# Crontab hour + minute, e.g. 04:00 am, or
+# e.g. 0,6,12,18 for more frequent backups
 database_backup_hour: 4
 database_backup_minute: 0
 
