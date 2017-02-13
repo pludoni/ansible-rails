@@ -48,11 +48,6 @@ nginx_conf_d:
     - gzip_vary on
     - gzip_proxied any
     - gzip_types {{nginx_gzip_types}}
-  brotli:
-    # check for precompressed .br files
-    - brotli_static yes
-    - brotli yes
-    - brotli_types text/html
   privacy:
     - "more_clear_headers 'X-Powered-By'"
     - "more_clear_headers 'X-Request-Id'"
