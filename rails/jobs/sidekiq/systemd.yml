@@ -1,0 +1,16 @@
+- name: Create sidekiq-{{app_name}}.service for systemd
+  template:
+    src: sidekiq.service.j2
+    dest: /lib/systemd/system/sidekiq-{{app_name}}.service
+  register: sidekiqtpl
+
+
+- systemd:
+    state: started
+    enabled: true
+    daemon_reload: true
+    name: sidekiq-{{app_name}}
+  when: sidekiqtpl.changed
+  ignore_errors: true
+  name: "Enable/Reload systemd
+
