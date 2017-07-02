@@ -1,6 +1,12 @@
 - name: Tell sidekiq to not accept new work
-  shell: 'sudo -n /bin/systemctl kill -s USR1 {{sidekiq_job_name}}'
+  shell: 'pgrep -u -f "sidekiq" | xargs kill -USR1 | exit 0'
+
+- name: "Restart Sidekiq"
+  service:
+    name: "{{sidekiq_job_name}}"
+    state: reloaded
   ignore_errors: true
+    sidekiq: reload
 
 - command: '/bin/true'
   name: 'Make sure sidekiq is started at the end'
