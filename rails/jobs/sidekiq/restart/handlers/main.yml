@@ -2,6 +2,4 @@
   shell: "{{ profile }}'restart {{ sidekiq_job_name }} || start {{ sidekiq_job_name }}'"
 
 - name: restart sidekiq (systemd)
-  service:
-    name: "{{sidekiq_job_name}}"
-    state: restarted
+  shell: 'sudo -n /bin/systemctl restart {{sidekiq_job_name}}'
