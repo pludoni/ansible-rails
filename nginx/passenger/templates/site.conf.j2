@@ -51,6 +51,14 @@ server {
     passenger_enabled on;
   }
 
+  {% if passenger_enable_message_bus is defined and passenger_enable_message_bus %}
+  # improve message_bus performance https://github.com/SamSaffron/message_bus#passenger
+   location /message-bus {
+     passenger_app_group_name {{app_name}}_websocket;
+     passenger_force_max_concurrent_requests_per_process 0;
+   }
+  {% endif %}
+
   {% if nginx_site_config is defined %}
   {{ nginx_site_config }}
   {% endif %}
