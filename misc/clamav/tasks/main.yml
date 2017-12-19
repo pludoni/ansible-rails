@@ -1,0 +1,11 @@
+- apt:
+    pkg: clamdscan
+    install_recommends: no
+  name: Install clamdscan (client only)
+
+- copy:
+    dest: /etc/clamav/clamd.conf
+    content: |
+      TCPSocket {{ clamd_port }}
+      TCPAddr {{ clamd_host }}
+  name: Overriding clamd config (/etc/clamav/clamd.conf)
