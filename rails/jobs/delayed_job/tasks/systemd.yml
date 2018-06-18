@@ -1,0 +1,19 @@
+- name: Create {{delayed_job_name}}.service for systemd
+  template:
+    src: template.service.j2
+    dest: /lib/systemd/system/{{delayed_job_name}}.service
+  register: tplresult
+
+- systemd:
+    state: started
+    enabled: true
+    daemon_reload: true
+    name: "{{delayed_job_name}}"
+  when: tplresult.changed
+  ignore_errors: true
+  name: "Enable/Reload systemd"
+
+- template:
+    src: 'sudoers.j2'
+    dest: '/etc/sudoers.d/{{delayed_job_name}}'
+  name: "Enable passwordless sudo for job control of {{delayed_job_name}}"

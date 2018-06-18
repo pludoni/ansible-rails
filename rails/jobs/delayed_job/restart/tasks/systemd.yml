@@ -1,0 +1,8 @@
+# - name: Tell delayed_job to not accept new work
+#   shell: 'sudo -n /bin/systemctl kill -s USR1 {{delayed_job_name}}'
+#   ignore_errors: true
+
+- command: '/bin/true'
+  name: 'Make sure delayed_job is started at the end'
+  notify: restart delayed_job (systemd)
+
