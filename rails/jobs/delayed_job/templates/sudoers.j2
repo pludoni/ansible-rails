@@ -1,0 +1,5 @@
+# {{ansible_managed}}
+%{{delayed_job_user}} ALL= NOPASSWD: /bin/systemctl start {{delayed_job_name}}
+%{{delayed_job_user}} ALL= NOPASSWD: /bin/systemctl stop {{delayed_job_name}}
+%{{delayed_job_user}} ALL= NOPASSWD: /bin/systemctl restart {{delayed_job_name}}
+%{{delayed_job_user}} ALL= NOPASSWD: /bin/systemctl status {{delayed_job_name}}

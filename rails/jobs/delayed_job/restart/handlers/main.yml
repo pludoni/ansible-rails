@@ -1,0 +1,2 @@
+- name: restart delayed_job (systemd)
+  shell: 'sudo -n /bin/systemctl restart {{delayed_job_name}}'
