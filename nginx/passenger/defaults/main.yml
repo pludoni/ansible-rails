@@ -2,6 +2,8 @@
 passenger_main_variables:
   passenger_max_pool_size: 30
   passenger_pool_idle_time: 0
+
+passenger_legacy_variables:
   passenger_root: "/usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini"
   passenger_ruby: "/usr/bin/passenger_free_ruby"
 
