@@ -1,0 +1,9 @@
+- name: "Pkg | Install libnginx-mod-http-passenger on ubuntu 17+"
+  apt: pkg=libnginx-mod-http-passenger
+
+- file:
+    src: /usr/share/nginx/modules-available/mod-http-passenger.load
+    dest: /etc/nginx/modules-enabled/50-mod-http-passenger.conf
+    state: link
+  notify: nginx restart
+  name: "Pkg | Symlink nginx passenger module to enabled modules"

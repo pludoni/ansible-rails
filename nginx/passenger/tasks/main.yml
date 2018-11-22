@@ -18,6 +18,9 @@
     - "passenger"
   notify: nginx restart
 
+- import_tasks: 'bionic.yml'
+  when: ansible_distribution_version is version('17.04', '>=')
+
 - name: Service | Ensure nginx is running
   service: name=nginx state=started enabled=yes
 

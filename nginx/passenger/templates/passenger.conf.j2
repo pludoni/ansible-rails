@@ -4,6 +4,13 @@
 {{key}} {{value}};
 {% endfor %}
 
+{% if ansible_distribution_version is version('17.04', '<') %}
+# Legacy Variables
+{% for key,value in passenger_legacy_variables.items() | list %}
+{{key}} {{value}};
+{% endfor %}
+{% endif %}
+
 {% if passenger_cloak_headers %}
 more_clear_headers 'X-Powered-By';
 more_clear_headers 'X-Request-Id';
