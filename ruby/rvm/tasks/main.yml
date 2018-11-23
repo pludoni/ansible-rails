@@ -83,3 +83,10 @@
   register: ruby_rvm_gem_install_result
   changed_when: >
     "Successfully installed {{ item }}" in ruby_rvm_gem_install_result.stdout
+
+- name: "ignore rvm warning if rvm is used"
+  copy:
+    content: allGemfiles
+    dest: /home/{{rvm_user}}/.rvm/user/rvmrc_ignored
+  become: yes
+  become_user: "{{ rvm_user }}"
