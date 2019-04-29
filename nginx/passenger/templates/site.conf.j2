@@ -1,15 +1,10 @@
 # {{ ansible_managed }}
 
 server {
-  listen  80;
-  listen [::]:80;
+  {% for port in passenger_listen %}
+  listen {{port}};
+  {% endfor %}
   server_name {{ app_hosts }};
-
-  # {% if ssl_cert is defined %}
-  # listen  443 ssl;
-  # ssl_certificate /etc/nginx/cert/myssl.crt;
-  # ssl_certificate_key /etc/nginx/cert/myssl.key;
-  # {% endif %}
 
   gzip on;
   client_max_body_size {{nginx_max_body_size}};
@@ -19,7 +14,7 @@ server {
   {{key}} {{value}};
   {% endfor %}
 
-  location ~ ^/(assets)/ {
+  location ~ ^/(assets|packs)/ {
     expires 21d;
     add_header Pragma public;
     add_header Cache-Control "public, must-revalidate, proxy-revalidate";
@@ -63,4 +58,7 @@ server {
   {{ nginx_site_config }}
   {% endif %}
 }
+
+passenger_pre_start {{passenger_pre_start}};
+
 # vim: ft=nginx

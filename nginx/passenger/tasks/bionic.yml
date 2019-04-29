@@ -1,3 +1,5 @@
+# based on https://www.phusionpassenger.com/library/install/nginx/install/oss/bionic/
+#
 - name: "Pkg | Install libnginx-mod-http-passenger on ubuntu 17+"
   apt: pkg=libnginx-mod-http-passenger
 

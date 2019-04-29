@@ -14,13 +14,8 @@
 - name: Apt | Add passenger repo
   apt_repository: repo='deb https://oss-binaries.phusionpassenger.com/apt/passenger {{ ansible_lsb.codename }} main' state=present update_cache=yes
 
-- name: Pkg | Install nginx passenger packages
-  apt:
-    state: present
-    pkg:
-    - "nginx-extras"
-    - "passenger"
-  notify: nginx restart
+- import_tasks: 'trusty.yml'
+  when: ansible_distribution_version is version('17.04', '<')
 
 - import_tasks: 'bionic.yml'
   when: ansible_distribution_version is version('17.04', '>=')

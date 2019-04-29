@@ -1,39 +1,65 @@
+# The maximum number of application processes that may simultaneously exist. A
+# larger number results in higher memory usage, but improves the ability to
+# handle concurrent HTTP requests.
+passenger_max_pool_size: 15
+
+# The maximum number of application processes that may simultaneously exist
+# for a single application. This helps to make sure that a single application
+# will not occupy all available slots in the application pool.
+# This value must be less than passenger_max_pool_size. A value of 0 means that
+# there is no limit placed on the number of processes a single application may
+# use, i.e. only the global limit of passenger_max_pool_size will be enforced.
+passenger_max_instances_per_app: 10
+
+# Setting the value to 0 is recommended if you're on a non-shared host that's only running a few applications, each which must be available at all times.
+passenger_pool_idle_time: 0
+
+# If that is undesirable, then this option can be used to pre-start application processes during Nginx startup.
+# A few things to be careful of:
+# This option accepts the URL of the web application you want to pre-start, not a on/off value! This might seem a bit weird, but read on for rationale. As for the specifics of the URL:
+# The domain part of the URL must be equal to the value of the server_name option of the server block that defines the web application.
+# Unless the web application is deployed on port 80, the URL should contain the web application's port number too.
+# The path part of the URL must point to some URI that the web application handles.
+# During Nginx startup, Passenger will send a dummy HEAD request to the given
+# URL and discard the result. In other words, Passenger simulates a web
+# access at the given URL. However this simulated request is always sent to
+# localhost, not to the IP that the domain resolves to. Suppose that bar.com
+# in example 1 resolves to 209.85.227.99; Passenger will send the following
+# HTTP request to 127.0.0.1 port 3500 (and not to 209.85.227.99 port 3500):
+passenger_pre_start: "http://{{app_domain}}/"
+
+# Path to Ruby - If not using RVM you must change this
+passenger_ruby: "/home/{{app_user}}/.rvm/wrappers/ruby-{{ruby_version}}/ruby"
+
 # variables for all apps in /etc/nginx/conf.d/passenger.conf
 passenger_main_variables:
-  passenger_max_pool_size: "{{ passenger_max_pool_size }}"
-  passenger_pool_idle_time: 0
-  passenger_show_version_in_header: 'off'
-
-passenger_legacy_variables:
-  passenger_root: "/usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini"
-  passenger_ruby: "/usr/bin/passenger_free_ruby"
+  passenger_max_pool_size: "{{passenger_max_pool_size | default(omit)}}"
+  passenger_max_instances_per_app: "{{passenger_max_instances_per_app | default(omit)}}"
+  passenger_pool_idle_time: "{{passenger_pool_idle_time | default(omit) }}"
 
 # variables for app /etc/nginx/sites_enabled/site
 passenger_variables:
   passenger_enabled: "on"
-  passenger_ruby: "/home/{{ app_user }}/.rvm/wrappers/ruby-{{ ruby_version }}/ruby"
+  passenger_ruby: "{{passenger_ruby}}"
   passenger_min_instances: 1
   passenger_max_preloader_idle_time: 0
 
 # Remove identifing headers like Passenger + Nginx version
 passenger_cloak_headers: true
+passenger_listen:
+  - '80'
+  - '[::]:80'
+
+# improve message_bus performance https://github.com/SamSaffron/message_bus#passenger
+passenger_enable_message_bus: false
 
 # one or more hosts, like
 # app_hosts: "www.example.com example.com en.example.com de.example.de"
 app_hosts: "{{ app_domain }}"
 
-nginx_config_file: "{{ app_name }}.conf"
-
-# Nginx Regex for paths that should be cached by clients for 7 days
-nginx_public_folder_to_cache: '^/(system|uploads|video)/'
 nginx_max_body_size: 200M
 
-nginx_gzip_types: 'text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/x-icon'
-
-nginx_install_from_passenger_repo: yes
-
-nginx_install_packages:
-- passenger
+passenger_site_config_file: "{{app_name}}.conf"
 
 nginx_worker_processes: 8
 nginx_worker_connections: 512
@@ -66,3 +92,4 @@ nginx_conf_d:
     - "{{ nginx_main_log_format }}"
 
 nginx_conf_extra: {}
+nginx_gzip_types: 'text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/x-icon'
