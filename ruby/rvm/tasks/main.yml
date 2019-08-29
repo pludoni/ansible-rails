@@ -27,9 +27,11 @@
 
 - name: Ruby versions
   shell: >
+    {% if rvm_jemalloc_enabled %}RUBY_EXTRA_CONFIGURE_OPTIONS="--with-jemalloc" {% endif %}
     ~/.rvm/bin/rvm install
     {{ '--default' if item == rvm_default else '' }}
     {{ item }}
+    {% if rvm_jemalloc_enabled %}--disable-binary{% endif %}
   args:
     creates: "~/.rvm/rubies/ruby-{{ item }}"
   become: yes

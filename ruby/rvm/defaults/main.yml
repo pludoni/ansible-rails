@@ -17,6 +17,9 @@ rvm_gpg_keys: "7D2BAF1CF37B13E2069D6956105BD0E739499BDB 409B6B1796C275462A170311
 rvm_gpg_key_server: "hkp://pool.sks-keyservers.net" # 'hkp://keys.gnupg.net'
 rvm_gpg_key_alternative_url: "https://rvm.io/mpapis.asc"
 
+# MUST install libjemalloc-dev on ubuntu before
+rvm_jemalloc_enabled: false
+
 # additional packages
 rvm_custom_packages:
 - nodejs # precompile assets
