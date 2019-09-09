@@ -2,6 +2,7 @@
 imagemagick_packages:
   - libmagickwand-dev
   - imagemagick
+  - ghostscript
 
 image_optimization_packages:
   - pngquant
