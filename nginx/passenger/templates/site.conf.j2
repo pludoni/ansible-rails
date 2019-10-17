@@ -53,7 +53,7 @@ server {
 
   {% if passenger_enable_message_bus is defined and passenger_enable_message_bus %}
   # improve message_bus performance https://github.com/SamSaffron/message_bus#passenger
-   location {{ passenger_message_bus_path | default('/message-bus') {
+   location {{ passenger_message_bus_path | default('/message-bus')}} {
      passenger_app_group_name {{app_name}}_websocket;
      passenger_force_max_concurrent_requests_per_process 0;
    }
