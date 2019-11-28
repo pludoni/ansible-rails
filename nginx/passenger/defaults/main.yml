@@ -45,7 +45,7 @@ passenger_variables:
   passenger_max_preloader_idle_time: 0
 
 # Remove identifing headers like Passenger + Nginx version
-passenger_cloak_headers: true
+passenger_cloak_headers: false
 passenger_listen:
   - '80'
   - '[::]:80'
