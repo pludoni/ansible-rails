@@ -1,9 +1,9 @@
-
 imagemagick_packages:
   - libmagickwand-dev
   - imagemagick
+  - ghostscript
+  - ttf-mscorefonts-installer
 
 image_optimization_packages:
   - pngquant
   - jpegoptim
-
