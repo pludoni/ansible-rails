@@ -1,3 +1,7 @@
+---
+- shell: 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections'
+  name: 'Accept MScorefonts EULA'
+
 - name: Install imagemagick and libmagickwand for rmagick
   apt: pkg={{ item }}
   with_flattened:
