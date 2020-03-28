@@ -30,7 +30,11 @@ WorkingDirectory={{RAILS_APP_CURRENT_PATH}}
 # If you use rbenv:
 # ExecStart=/bin/bash -lc 'bundle exec sidekiq -e production'
 # If you use the system's ruby:
+{% if sidekiq_version >= 6 %}
+ExecStart=/bin/bash -l -c 'bundle exec sidekiq -e {{sidekiq_rails_env}} -C {{ sidekiq_config_file }}'
+{% else %}
 ExecStart=/bin/bash -l -c 'bundle exec sidekiq -i {{sidekiq_worker_index}} -e {{sidekiq_rails_env}} -L {{sidekiq_log_file}} -C {{ sidekiq_config_file }}'
+{% endif %}
 User={{rails_user_name}}
 Group={{rails_user_name}}
 UMask=0002
