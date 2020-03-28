@@ -33,4 +33,4 @@ database_backup_pg_job: >-
 database_backup_username: "backup"
 database_backup_password: "backup"
 database_backup_mysql_job: >-
-  mysqldump -u"{{ database_backup_username }}" -p'{{ database_backup_password }}' {{ database_backup_name }} | gzip > {{ database_backup_dir }}/`date +\%F:\%T`.sql.gz && cd {{ database_backup_dir }} && rm -f `ls -t | awk 'NR>{{ database_backup_keep }}'`
+  mysqldump -u"{{ database_backup_username }}" -p'{{ database_backup_password }}' --max_allowed_packet=512M {{ database_backup_name }} | gzip > {{ database_backup_dir }}/`date +\%F:\%T`.sql.gz && cd {{ database_backup_dir }} && rm -f `ls -t | awk 'NR>{{ database_backup_keep }}'`
