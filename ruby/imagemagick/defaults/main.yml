@@ -3,6 +3,9 @@ imagemagick_packages:
   - imagemagick
   - ghostscript
   - ttf-mscorefonts-installer
+  - libvips
+  - libvips-dev
+  - libvips-tools
 
 image_optimization_packages:
   - pngquant
