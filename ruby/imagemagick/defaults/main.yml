@@ -3,6 +3,7 @@ imagemagick_packages:
   - imagemagick
   - ghostscript
   - ttf-mscorefonts-installer
+  - fonts-droid-fallback
   - libvips
   - libvips-dev
   - libvips-tools
