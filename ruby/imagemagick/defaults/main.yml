@@ -7,6 +7,9 @@ imagemagick_packages:
   - libvips
   - libvips-dev
   - libvips-tools
+  # svg
+  - librsvg2-bin
+
 
 image_optimization_packages:
   - pngquant
