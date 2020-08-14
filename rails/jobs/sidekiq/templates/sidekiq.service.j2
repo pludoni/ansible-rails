@@ -43,6 +43,8 @@ UMask=0002
 RestartSec=1
 Restart=on-failure
 
+LimitNOFILE=65536
+
 # output goes to /var/log/syslog
 StandardOutput=syslog
 StandardError=syslog
