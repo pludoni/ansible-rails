@@ -1,10 +1,16 @@
-
 imagemagick_packages:
   - libmagickwand-dev
   - imagemagick
   - ghostscript
+  - ttf-mscorefonts-installer
+  - fonts-droid-fallback
+  - libvips
+  - libvips-dev
+  - libvips-tools
+  # svg
+  - librsvg2-bin
+
 
 image_optimization_packages:
   - pngquant
   - jpegoptim
-
