@@ -1,0 +1,2 @@
+- name: "restart good_job (systemd)"
+  shell: 'sudo -n /bin/systemctl restart {{good_job_job_name}}'

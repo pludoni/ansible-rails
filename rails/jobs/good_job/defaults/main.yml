@@ -1,0 +1,5 @@
+good_job_job_name: "good_job-{{ app_name }}"
+good_job_rails_env: "{{ rails_env }}"
+good_job_log_file: "{{ RAILS_APP_SHARED_PATH }}/log/good_job.log"
+good_job_config_file: "{{ RAILS_APP_SHARED_PATH }}/config/good_job.yml"
+good_job_configuration_max_threads: 5

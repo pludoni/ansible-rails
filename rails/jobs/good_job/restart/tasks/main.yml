@@ -1,0 +1,4 @@
+- command: '/bin/true'
+  name: 'Make sure good_job is restarted at the end'
+  notify: "restart good_job (systemd)"
+
