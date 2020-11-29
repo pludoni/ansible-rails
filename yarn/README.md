@@ -11,6 +11,3 @@ Installs Yarn + Nodejs via ppa/apt repository
 
 **NOTE**: If you want to use yarn, you also might want to enable yarn:install step during deployment, see [**rails/create-release**](https://github.com/dresden-weekly/ansible-rails/tree/develop/rails/create-release)
 
-### Development
-
-This role is vendored and adapted from https://github.com/Oefenweb/ansible-nodejs

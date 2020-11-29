@@ -1,12 +1,7 @@
-nodejs_version: 'nodejs-v8x'
+nodejs_version: 'nodejs-v14x'
 
 nodejs_install:
 - build-essential
-
-nodejs_npm_packages: []
-
-nodejs_dependencies:
-  - curl
 
 yarn_repositories:
 - type: deb
