@@ -5,9 +5,7 @@
     owner: "{{ rails_app_owner }}"
     group: "{{ rails_app_group }}"
     state: directory
-  with_flattened:
-  - "{{ rails_create_folders }}"
-  - "{{ rails_app_custom_folders }}"
+  loop: "{{ rails_create_folders + rails_app_custom_folders | flatten }}"
 
 - name: facts
   set_fact:

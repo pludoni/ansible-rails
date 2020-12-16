@@ -9,3 +9,11 @@
   when: ansible_service_mgr != "systemd"
 - include: "systemd.yml"
   when: ansible_service_mgr == "systemd"
+
+- name: "Increase ulimit for sidekiq"
+  pam_limits:
+    limit_type: '-'
+    limit_item: 'nofile'
+    value: 8192
+    domain: "{{ sidekiq_upstart_user }}"
+
