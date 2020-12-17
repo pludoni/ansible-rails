@@ -1,13 +1,10 @@
 ---
 - name: Packages
   apt:
-    pkg: "{{ item }}"
+    pkg: "{{ rvm_packages + rvm_custom_packages }}"
     update_cache: yes
     state: present
     cache_valid_time: 86400
-  with_flattened:
-  - "{{ rvm_packages }}"
-  - "{{ rvm_custom_packages }}"
 
 - include: ruby187.yml
   when: rvm_default == '1.8.7' or '1.8.7' in rvm_rubies
@@ -20,7 +17,7 @@
     curl -L https://get.rvm.io
     | bash -s stable --autolibs=disable --auto-dotfiles
   args:
-    creates: ~/.rvm
+    creates: ~/.rvm/installed.at
     warn: no # don't show the curl warning (get_url can't pipe the script to bash)
   become: yes
   become_user: "{{ rvm_user }}"
