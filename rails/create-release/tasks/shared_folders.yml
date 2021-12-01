@@ -25,6 +25,7 @@
     path: "{{ RAILS_APP_RELEASE_PATH }}/{{ item }}"
     state: link
     force: yes
+  no_log: true
   with_flattened:
   - "{{ rails_shared_files }}"
 
@@ -34,5 +35,6 @@
     path: "{{ RAILS_APP_RELEASE_PATH }}/{{ item.file }}"
     state: link
     force: yes
+  no_log: true
   with_flattened:
   - "{{ rails_provisioned_files }}"
