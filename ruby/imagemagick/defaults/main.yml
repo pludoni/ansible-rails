@@ -9,6 +9,7 @@ imagemagick_packages:
   - libvips-tools
   # svg
   - librsvg2-bin
+  - webp
 
 
 image_optimization_packages:
