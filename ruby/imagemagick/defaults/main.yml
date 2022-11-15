@@ -10,6 +10,8 @@ imagemagick_packages:
   # svg
   - librsvg2-bin
   - webp
+  # Some crappy generated svgs need a better converter
+  - inkscape
 
 
 image_optimization_packages:
