@@ -39,6 +39,8 @@ passenger_main_variables:
 
 # variables for app /etc/nginx/sites_enabled/site
 passenger_variables:
+  # required for ruby3: otherwise bundle/setup errors occur
+  passenger_preload_bundler: "on"
   passenger_enabled: "on"
   passenger_ruby: "{{passenger_ruby}}"
   passenger_min_instances: 1
