@@ -1,9 +1,11 @@
-nodejs_version: 'nodejs-v10x'
+nodejs_version: 'nodejs-v14x'
 
 nodejs_install:
 - build-essential
 
 nodejs_version_map:
+  nodejs-v18x: '18.x'
+  nodejs-v16x: '16.x'
   nodejs-v14x: '14.x'
   nodejs-v12x: '12.x'
   nodejs-v11x: '11.x'
