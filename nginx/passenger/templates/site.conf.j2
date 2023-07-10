@@ -18,6 +18,8 @@ server {
     expires 21d;
     add_header Pragma public;
     add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+    # allow Google Translate
+    add_header Access-Control-Allow-Origin "*";
     gzip on;
     # enable delivery of prebuilt .gz files
     gzip_static  on;
@@ -25,6 +27,8 @@ server {
 
   location ~ {{nginx_public_folder_to_cache}} {
     expires 7d;
+    # allow Google Translate
+    add_header Access-Control-Allow-Origin "*";
     add_header Pragma public;
     add_header Cache-Control "public";
     gzip on;
