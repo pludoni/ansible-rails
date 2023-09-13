@@ -12,6 +12,10 @@ imagemagick_packages:
   - webp
   # Some crappy generated svgs need a better converter
   - inkscape
+  - libjpeg-dev
+  - libpng-dev
+  - libtiff-dev
+  - libwebp-dev
 
 
 image_optimization_packages:
