@@ -12,6 +12,12 @@ rvm_user: "{{ app_user }}"
 gem_version: ''
 rvm_gem_version: "{{ gem_version }}"
 
+rvm_install_jit_rust: false
+
+# if rvm_install_jit_rust is true then ' -C "--enable-yjit"' else nothing
+rvm_install_flags: >
+  {{ ' -C "--enable-yjit"' if rvm_install_jit_rust else '' }}
+
 # gpg keys required for rvm installation
 rvm_gpg_keys: '7D2BAF1CF37B13E2069D6956105BD0E739499BDB 409B6B1796C275462A1703113804BB82D39DC0E3'
 rvm_gpg_key_server: 'hkp://keys.gnupg.net'
@@ -20,6 +26,7 @@ rvm_gpg_key_alternative_url: "https://rvm.io/mpapis.asc"
 # additional packages
 rvm_custom_packages:
 - nodejs # precompile assets
+- libjemalloc-dev # memory allocator
 
 rvm_install_gems:
 - bundler

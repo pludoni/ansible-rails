@@ -1,4 +1,5 @@
 ---
+
 - name: Packages
   apt:
     pkg: "{{ rvm_packages + rvm_custom_packages }}"
@@ -6,8 +7,16 @@
     state: present
     cache_valid_time: 86400
 
-- include: ruby187.yml
-  when: rvm_default == '1.8.7' or '1.8.7' in rvm_rubies
+- import_tasks: rust.yml
+  when: rvm_install_jit_rust
+
+- name: "Ubuntu >=22: install libyaml-dev"
+  apt:
+    name: libyaml-dev
+    state: present
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_major_version | int >= 22
 
 - include: gpg_keys.yml
   when: rvm_gpg_keys != ''
@@ -22,11 +31,33 @@
   become: yes
   become_user: "{{ rvm_user }}"
 
+- name: "Ruby versions (yjit)"
+  when: rvm_install_jit_rust
+  shell: >
+    rustc --version &&
+    ~/.rvm/bin/rvm install
+    {{ '--default' if item == rvm_default else '' }}
+    {{ item }}
+     -C "--enable-yjit"
+  args:
+    creates: "~/.rvm/rubies/ruby-{{ item }}"
+  environment:
+    HOME: "/home/{{ app_user }}"
+    PATH: "{{ ansible_env.PATH }}:/home/{{ app_user }}/.cargo/bin"
+
+  become: yes
+  become_user: "{{ rvm_user }}"
+  with_flattened:
+  - "{{ rvm_rubies }}"
+  - "{{ rvm_default }}"
+
 - name: Ruby versions
+  when: not rvm_install_jit_rust
   shell: >
     ~/.rvm/bin/rvm install
     {{ '--default' if item == rvm_default else '' }}
     {{ item }}
+    {{ rvm_install_flags }}
   args:
     creates: "~/.rvm/rubies/ruby-{{ item }}"
   become: yes
