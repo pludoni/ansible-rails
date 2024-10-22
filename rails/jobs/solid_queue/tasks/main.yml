@@ -1,0 +1,19 @@
+- name: Create {{solid_queue_job_name}}.service for systemd
+  template:
+    src: solid_queue.service.j2
+    dest: /lib/systemd/system/{{solid_queue_job_name}}.service
+  register: solid_queuetpl
+
+- systemd:
+    state: started
+    enabled: true
+    daemon_reload: true
+    name: "{{solid_queue_job_name}}"
+  when: solid_queuetpl.changed
+  ignore_errors: true
+  name: "Enable/Reload systemd"
+
+- template:
+    src: 'sudoers.j2'
+    dest: '/etc/sudoers.d/{{solid_queue_job_name}}'
+  name: "Enable passwordless sudo for job control of {{solid_queue_job_name}}"

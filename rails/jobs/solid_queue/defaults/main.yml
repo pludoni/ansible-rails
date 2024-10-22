@@ -1,0 +1,2 @@
+solid_queue_job_name: "solid_queue_{{ app_name }}"
+solid_queue_config_file: "{{ RAILS_APP_SHARED_PATH }}/config/queue.yml"

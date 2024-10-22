@@ -1,0 +1,6 @@
+# {{ansible_managed}}
+%{{rails_user_name}} ALL= NOPASSWD: /bin/systemctl start {{solid_queue_job_name}}
+%{{rails_user_name}} ALL= NOPASSWD: /bin/systemctl stop {{solid_queue_job_name}}
+%{{rails_user_name}} ALL= NOPASSWD: /bin/systemctl restart {{solid_queue_job_name}}
+%{{rails_user_name}} ALL= NOPASSWD: /bin/systemctl status {{solid_queue_job_name}}
+%{{rails_user_name}} ALL= NOPASSWD: /bin/systemctl kill -s USR1 {{solid_queue_job_name}}

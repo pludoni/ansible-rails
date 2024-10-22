@@ -1,0 +1,4 @@
+- command: '/bin/true'
+  name: 'Make sure solid_queue is restarted at the end'
+  notify: "restart solid_queue (systemd)"
+

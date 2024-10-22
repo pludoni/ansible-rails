@@ -1,0 +1,1 @@
+solid_queue_job_name: "solid_queue_{{ app_name }}"

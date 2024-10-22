@@ -1,0 +1,2 @@
+- name: "restart solid_queue (systemd)"
+  shell: 'sudo -n /bin/systemctl restart {{solid_queue_job_name}}'
