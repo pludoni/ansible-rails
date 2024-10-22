@@ -24,4 +24,4 @@
 - name: Service | Ensure nginx is running
   service: name=nginx state=started enabled=yes
 
-- include: "config.yml"
+- include_tasks: "config.yml"

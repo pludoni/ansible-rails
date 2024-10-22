@@ -8,9 +8,9 @@
       export LC_ALL="{{ postgresql_locale }}.{{ postgresql_shell_encoding }}"
 
 - include_vars: "{{ ansible_os_family }}.yml"
-- include: RedHat.yml
+- include_tasks: RedHat.yml
   when: ansible_os_family == "RedHat"
-- include: Debian.yml
+- include_tasks: Debian.yml
   when: ansible_os_family == "Debian"
 
 - name: Configure

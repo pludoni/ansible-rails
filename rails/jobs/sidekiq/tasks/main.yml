@@ -5,7 +5,7 @@
   become: yes
   become_user: "{{ sidekiq_upstart_user }}"
 
-- include: "upstart.yml"
+- include_tasks: "upstart.yml"
   when: ansible_service_mgr != "systemd"
-- include: "systemd.yml"
+- include_tasks: "systemd.yml"
   when: ansible_service_mgr == "systemd"

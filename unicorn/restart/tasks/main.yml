@@ -6,7 +6,7 @@
     path: "{{ RAILS_APP_RESTART_PATH }}"
   register: rails_unicorn_restart
 
-- include: RedHat.yml
+- include_tasks: RedHat.yml
   when: ansible_os_family == "RedHat"
-- include: Debian.yml
+- include_tasks: Debian.yml
   when: ansible_os_family == "Debian"

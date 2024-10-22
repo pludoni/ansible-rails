@@ -1,8 +1,8 @@
 - include_vars: "{{ ansible_os_family }}.yml"
 
-- include: RedHat-packages.yml
+- include_tasks: RedHat-packages.yml
   when: ansible_os_family == "RedHat"
-- include: Debian-packages.yml
+- include_tasks: Debian-packages.yml
   when: ansible_os_family == "Debian"
 
 - name: Install rbenv

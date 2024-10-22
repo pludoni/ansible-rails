@@ -2,8 +2,8 @@
 # Define a release id, extract it from git and construct shared and custom folders
 #
 ---
-- include: facts.yml
-- include: git.yml
+- include_tasks: facts.yml
+- include_tasks: git.yml
 
 - name: Clean shared folders
   file:
@@ -40,4 +40,4 @@
   when: "item.plain is defined"
   with_items: "{{ rails_provisioned_files }}"
 
-- include: "shared_folders.yml"
+- include_tasks: "shared_folders.yml"

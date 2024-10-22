@@ -65,3 +65,5 @@ nginx_max_body_size: 200M
 passenger_site_config_file: "{{app_name}}.conf"
 
 nginx_gzip_types: 'text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/x-icon'
+
+nginx_install_from_passenger_repo: true

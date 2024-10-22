@@ -4,7 +4,7 @@
 ---
 - include_vars: RedHat.yml
   when: ansible_os_family == "RedHat"
-- include: RedHat.yml
+- include_tasks: RedHat.yml
   when: ansible_os_family == "RedHat"
 
 - name: Bundle install

@@ -5,4 +5,4 @@
   tags:
   - facts
 
-- include: "{{ webrick_service_type }}.yml"
+- include_tasks: "{{ webrick_service_type }}.yml"

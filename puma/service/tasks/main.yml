@@ -12,4 +12,4 @@
   become: yes
   become_user: "{{ puma_user }}"
 
-- include: "{{ puma_service_type }}.yml"
+- include_tasks: "{{ puma_service_type }}.yml"

@@ -53,6 +53,12 @@ server {
      passenger_force_max_concurrent_requests_per_process 0;
    }
   {% endif %}
+  {% if passenger_enable_cable is defined and passenger_enable_cable %}
+  location /cable {
+    passenger_app_group_name {{app_name }}_NAME_HERE_action_cable;
+    passenger_force_max_concurrent_requests_per_process 0;
+  }
+  {% endif %}
 
   {% if nginx_site_config is defined %}
   {{ nginx_site_config }}
