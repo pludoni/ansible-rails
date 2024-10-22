@@ -14,7 +14,7 @@ server {
   {{key}} {{value}};
   {% endfor %}
 
-  location ~ ^/(assets|packs)/ {
+  location ~ ^/(assets|packs|vite)/ {
     expires 21d;
     add_header Pragma public;
     add_header Cache-Control "public, must-revalidate, proxy-revalidate";

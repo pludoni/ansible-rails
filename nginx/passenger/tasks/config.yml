@@ -1,11 +1,14 @@
 - template: dest=/etc/nginx/conf.d/passenger.conf src=passenger.conf.j2
   notify: nginx reload
   name: "Create Passenger global config"
+  tags: [passenger_config]
 
 - template: dest=/etc/nginx/sites-available/{{passenger_site_config_file}} src=site.conf.j2
   notify: nginx reload
   name: "Create site config"
+  tags: [passenger_config]
 
 - file: src=/etc/nginx/sites-available/{{passenger_site_config_file}} dest=/etc/nginx/sites-enabled/{{app_name}} state=link owner=root group=root
   notify: nginx reload
   name: "Link site config"
+  tags: [passenger_config]
