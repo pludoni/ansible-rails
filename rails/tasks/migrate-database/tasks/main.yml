@@ -2,7 +2,7 @@
 # Perform the db:migrate rake task
 #
 - name: Migrate database
-  command: "{{ profile }}'bundle exec rake db:migrate'"
+  command: "{{ profile }}'bundle exec rake db:prepare'"
   args:
     chdir: "{{ RAILS_APP_RELEASE_PATH }}"
   register: rails_migrate_database_result
